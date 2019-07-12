@@ -1,17 +1,16 @@
-<h4 style="text-align:center;">Featured Events</h4>
+<h4 style="text-align:center;">Upcoming Events</h4>
 <div class="row announcement-list">
     {% for item in Items %}
         <div class="col-md-2 col-sm-6">
           
-            {% assign directUrl = item | Attribute:'DirectURL' %}
-                 {% if directUrl != empty -%}
-            <p><a href="{{ item.DirectURL }}">{{ item.Image }}</a></p>
-            {% else %}
-            <p><a href="{{ LinkedPages.DetailPage }}?Item={{ item.Id }}">{{ item.Image}}</a></p>
-            {% endif %}
+			{% assign redirectURL = item | Attribute:'ExternalLink','RawValue' %}
+			{% assign detailURL = '' %}
+			{% if redirectURL and redirectURL != empty %}{% assign detailURL = redirectURL %}{{}}{% else %}{% capture detailURL %}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{% endcapture %}{% endif %}
+
+            <p><a href="{{ detailURL }}">{{ item | Attribute:'Image' }}</a></p>
+
            
-            <a href="{{ LinkedPages.DetailPage }}?Item={{ item.Id }}"><h5 class="announcement-title">{{ item.Title }}</h5></a>
-            <p class="announcement-text">{{ item.SummaryText }}</p>
+            <a href="{{ detailURL }}"><h5 class="announcement-title">{{ item.Title }}</h5></a>
         </div>
         {% capture breakNow %}{{ forloop.index | Modulo:6 }}{% endcapture %}
         {% if breakNow == 0 -%}
