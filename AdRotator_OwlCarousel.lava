@@ -1,0 +1,39 @@
+﻿<div id="announcement-owl" class="owl-carousel">
+    <!-- Wrapper for slides -->
+    {% assign itemsSize = 0 %}
+        {% for item in Items %}{% assign Image = item | Attribute:'Image' %}
+        {% if Image and Image != empty %}
+        {% if forloop.index == 1 -%}
+        <div class="item active">
+        {% else -%}
+        <div class="item">
+            {% endif -%}
+            {% assign redirectURL = item | Attribute:'RedirectURL','RawValue' %}
+            {% assign detailURL = '' %}
+            {% if redirectURL and redirectURL != empty %}{% assign detailURL = redirectURL %}{{}}{% else %}{% capture detailURL %}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{% endcapture %}{% endif %}
+            <a href="{{ detailURL }}">{{ Image }}</a>
+        </div>
+        {% assign itemsSize = itemsSize | Plus:1 %}
+        {% endif %}
+        {% if itemsSize < 1 %}
+        <div class="item active">
+            <img class="img-responsive" src="/Themes/FG/Assets/img/Hero.jpg" />
+        </div>
+        {% endif %}
+    </div>
+{% if itemsSize > 1 %}
+<script>
+$(document).ready(function ()
+{
+    $("#announcement-owl").owlCarousel({
+        items: 1,
+        navigation: true,
+        singleItem: true,
+        pagination: false,
+        navigationText: ['<span class="fa fa-chevron-left"></span>', '<span class="fa fa-chevron-right"></span>'],
+        autoPlay: 5000,
+        stopOnHover: true,
+        transitionStyle: "fade",
+    });
+});</script>
+{% endif %}
