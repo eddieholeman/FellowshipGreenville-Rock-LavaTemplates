@@ -1,0 +1,22 @@
+﻿{% for item in Items %}
+<article class="margin-b-lg">
+
+  
+	<h4>{{ item.Title }}</h4>
+ 
+
+
+   {{ item.Summary }}<br /><br />
+   <strong>Main Objective: </strong>{{ item.MainObjective }}<br /><br />
+   <strong>Job Description:</strong><br>{{ item.Content }}
+   <strong>Critical Skills: </strong>{{ item.CriticalSkills }}<br /><br />
+   <strong>Other Performance Expectations:</strong><br />{{ item.OtherPerformanceExpectations}}
+   <strong>Reports To: </strong>{{ item.ReportsTo }}<br />
+   <strong>Relates Closely To: </strong>{{ item.RelatesCloselyTo }}<br />
+   <strong>Job Status: </strong>{{ item.JobStatus }}<br /><br />
+   <h4><a href="/application/employment/1" class="btn btn-default">Apply Now</a></h4>
+   
+
+
+
+{% endfor %}
