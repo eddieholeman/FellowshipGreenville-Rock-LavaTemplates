@@ -71,14 +71,14 @@
 		</div>
 		
 		<h4 class="messages-title margin-t-lg">In This Series</h4>
-		<ol class="messages">
-			{% for message in item.ChildItems %}
+		<ul class="messages">
+			{% for message in item.ChildItems reversed %}
 				<li>
 					<a href="{{ LinkedPages.DetailPage }}?Item={{ message.ChildContentChannelItem.Id }}">
-						{{ message.ChildContentChannelItem.Title }}</li>
+						{{ message.ChildContentChannelItem.Title }} | {{ message.ChildContentChannelItem.StartDateTime | Date:'M/d/yyyy' }} | {{ message.ChildContentChanneltem | Attribute:'Podcast_Author' }}</li>
 					</a>
 			{% endfor %}
-		</o/>
+		</ul>
 		
 	</article>
 	
