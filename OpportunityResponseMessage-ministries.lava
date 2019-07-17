@@ -1,0 +1,7 @@
+<div class="alert alert-success">
+	<strong>
+	Way to go!
+	</strong>
+	</br>
+	Your request to receive more information on the {{Opportunity.PublicName}} team has been submitted.
+</div>
