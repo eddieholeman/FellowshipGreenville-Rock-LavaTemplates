@@ -1,0 +1,46 @@
+﻿<div>
+  <div id="announcement-rotator" class="carousel slide" data-ride="carousel">
+
+    <ol class="carousel-indicators">
+      {% for item in Items %}
+
+      {% if forloop.index0 == 0 -%}
+      <li data-target="#announcement-rotator" data-slide-to="0" class="active"></li>
+      {% else -%}
+      <li data-target="#announcement-rotator" data-slide-to="{{ forloop.index0 }}"></li>
+      {% endif -%}
+      {% endfor %}
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      {% for item in Items %}
+      {% if forloop.index == 1 -%}
+        <div class="item active">
+      {% else -%}
+        <div class="item">
+      {% endif %}
+      
+          {% assign link = item | Attribute:'ExternalLink' %}
+          {% if link == '' %}
+              {% capture link %}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{% endcapture %}
+          {% endif %}
+
+
+          <a href="{{ link }}">{{ item.Image }}</a>
+        </div>
+        {% endfor %}
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#announcement-rotator" data-slide="prev">
+        <span class="fa fa-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#announcement-rotator" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+      </a>
+
+    </div>
+    <img src="/Themes/NewCovenant_v1/Assets/Images/rotator-shadow.png" style="width: 100%; margin-bottom: 30px;" class="hidden-xs" />
+  </div>
+</div>
