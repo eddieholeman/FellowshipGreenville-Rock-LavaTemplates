@@ -1,0 +1,10 @@
+﻿{% assign item = Items | First %}
+{% if item  %}
+	{% assign videoLink = item | Attribute:'VideoLink','RawValue' %}
+	{% assign audioLink = item | Attribute:'AudioLink','RawValue' %}
+	{% assign notesLink = item | Attribute:'NotesLink','RawValue' %}
+    LATEST MESSAGE &gt; <br class="visible-xs" /> <a href="{{ LinkedPages.DetailPage }}?Item={{ item.Id }}">{{ item.Title }} ({{ item | Attribute:'Speaker' }}, {{ item.StartDateTime | Date:'MMM d' }})</a> <br class="visible-xs" />
+    {% if videoLink != '' %}<a href="{{ videoLink }}" title="Video"><i class="arrow_triangle-right_alt" aria-hidden="true"></i></a>&nbsp;{% endif %}
+    {% if audioLink != '' %}<a href="{{ audioLink }}" title="Audio"><i class="icon_volume-high_alt" aria-hidden="true"></i></a>&nbsp;{% endif %}
+    {% if notesLink != '' %}<a href="{{ notesLink }}" title="Notes"><i class="icon_document_alt" aria-hidden="true"></i></a>{% endif %}
+{% endif %}
