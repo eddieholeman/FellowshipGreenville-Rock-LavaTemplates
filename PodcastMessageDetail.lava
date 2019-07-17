@@ -6,7 +6,7 @@
 {% if item  %}
 	
 	{% assign videoLink = item | Attribute:'Podcast_Video','RawValue' %}
-	{% assign videoEmbed = item | Attribute:'Podcast_VimeoPlayer','RawValue' %}
+	{% assign videoEmbed = item | Attribute:'Podcast_VideoPlayer','RawValue' %}
 	{% assign audioLink = item | Attribute:'Podcast_Audio','RawValue' %}
 	{% assign audiouploadLink = item | Attribute:'Podcast_Audioupload','Url' %}
 	{% assign notesLink = item | Attribute:'Podcast_SermonNotes','RawValue' %}
