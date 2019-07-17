@@ -1,0 +1,78 @@
+<div class="row">
+    <script>
+        var nameHolder = "";
+    </script>
+    <style>
+        @media(max-width: 767px){.cardContainer {margin-left : 28% !important;}}
+        @media(max-width: 500px){.cardContainer {margin-left : 15% !important;}}
+    </style>
+ 
+    {% for item in Items %}
+    {% assign hidden = item | Attribute:'IsHidden' %}
+    {% if hidden == "yes" %}
+    {% else %}
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
+                {% assign newURL = item | Attribute:'RedirectURL','RawValue' %}
+             <div class="cardContainer" style="max-width: 250px; min-height: 400px;">   
+            <div class="picBubble" id="WH-{{forloop.index}}" style="background: url(/GetImage.ashx?guid={{ item | Attribute: 'Picture' , 'RawValue' }}) 50% 50% / cover;">
+<!--                       {{ item.Image }}-->
+            </div>                   
+            <div class="">
+                <h4 id="Name-{{forloop.index}}" style="font-size: 27px; text-align: center;">{{ item.Title }}</h4>
+                <span style=" display: block; text-align: center;">{{ item | Attribute:'PositionTitle' }}</span><br />
+                <ul class="list-inline" style="text-align: center; margin-bottom: 30px;">
+                    <li>
+					{% comment %}
+                       <a href="#" id="EM-{{forloop.index}}"><i class="fa fa-envelope-o fa-2x"></i></a>
+					{% endcomment %}
+                       <a href="mailto:{{ item | Attribute:'Username'}}@fellowshipgreenville.org"><i class="fa fa-envelope-o fa-2x"></i></a>
+                    </li>
+                    <li>
+						<a href="tel:+1-864-234-7033" + "{{ item | Attribute:'PhoneExtension'}}" ><i class="fa fa-phone fa-2x"></i></a> <font color="blue">x{{ item | Attribute: 'PhoneExtension'}}</font>
+					
+                   
+                    </li>
+					{% comment %}
+                     {% assign socialtype = item | Attribute:'SocialIcon' %}
+                        <li >
+                        {% case socialtype %}
+                        {% when 'Blog' %}
+                            <a href="{{ item | Attribute:'Socialanchorhandle'}}" alt="Blog"><i class="fa fa-rss fa-2x"></i></a>
+                        {% when 'Twitter' %}
+                            <a href="{{ item | Attribute:'Socialanchorhandle'}}" alt="Twitter"><i class="fa fa-twitter fa-2x"></i></a>
+                        {% when 'Instagram' %}
+                            <a href="{{ item | Attribute:'Socialanchorhandle'}}" alt="Instagram"><i class="fa fa-instagram  fa-2x"></i></a>
+                        {% endcase %}
+ 
+                    </li>
+					{% endcomment %}
+                </ul>
+            </div>
+    </div>
+        <br />
+           
+           
+            
+    </div>
+ 
+ {% comment %}      
+        <script>
+           nameHolder = $('#Name-{{forloop.index}}').text();
+
+           nameHolder =  nameHolder.replace(" ", ".");
+
+           nameHolder = {{ item | Attribute:'Username' }}
+
+            $('#EM-{{forloop.index}}').attr("href","mailto:" + nameHolder + "@fellowshipgreenville.org");
+        </script>
+{% endcomment %}
+      {% endif %}
+      {% endfor -%}
+</div>
+{% comment %}
+      {% capture breakNow %}{{ forloop.index | Modulo:4 }}{% endcapture %}
+      {% if breakNow == 0 -%}
+    </div>
+    <div class="row">
+      {% endif -%}
+{% endcomment %}
