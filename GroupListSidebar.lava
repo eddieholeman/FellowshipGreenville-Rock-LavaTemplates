@@ -8,14 +8,16 @@
   {% endif %}
 
   <ul class="list-group list-group-panel">
-    {% if group.IsLeader %}
     {% for group in Groups %}
 
+
+	{% comment %}
     {% capture isLeaderIcon %}
     {% if group.IsLeader %}
       <i class='fa fa-asterisk'></i>
     {% endif %}
     {% endcapture %}
+	{% endcomment %}
 
     <li class="list-group-item">
       <a href="{{ LinkedPages.DetailPage }}?GroupId={{group.Group.Id}}" class="js-group-item" data-toggle="tooltip" data-placement="top" title="{{ group.GroupType }}">
@@ -33,8 +35,9 @@
         {% endif %}
       </a>
     </li>
+
     {% endfor %}
-	{% endif %}
+
   </ul>
 
 </div>
