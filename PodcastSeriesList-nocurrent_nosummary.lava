@@ -40,7 +40,7 @@
 	
 	.series-body {
 		padding: 15px;
-		height: 172px;
+		height: 105px;
 	}
 	
 	.series-summary {
