@@ -1,0 +1,64 @@
+﻿<div id="announcement-rotator" class="carousel slide" data-ride="carousel">
+
+{% comment %}
+  <!-- Wrapper for slides -->
+{% assign itemsSize = Items | Size %}
+  <div class="carousel-inner">
+    {% for item in Items %}
+    {% if forloop.index == 1 -%}
+    <div class="item active">
+      {% else -%}
+      <div class="item">
+        {% endif -%}
+        {% assign redirectURL = item | Attribute:'RedirectURL','RawValue' %}
+        {% assign detailURL = '' %}
+        {% if redirectURL and redirectURL != empty %}{% assign detailURL = redirectURL %}{{}}{% else %}{% capture detailURL %}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{% endcapture %}{% endif %}
+        <a href="{{ detailURL }}">{{ item | Attribute:'Image' }}</a>
+      </div>
+      {% endfor %}
+      {% if itemsSize < 1 %}
+      <div class="item active">
+        <img class="img-responsive" src="/Themes/FG/Assets/img/Hero.jpg" />
+      </div>
+      {% endif %}
+    </div>
+{% endcomment %}
+
+    <!-- Wrapper for slides -->
+	{% assign itemsSize = Items | Size %}
+    <div class="carousel-inner">
+      {% for item in Items %}
+      {% if forloop.index == 1 -%}
+        <div class="item active">
+      {% else -%}
+        <div class="item">
+      {% endif %}
+      
+          {% assign link = item | Attribute:'ExternalLink' %}
+          {% if link == '' %}
+              {% capture link %}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{% endcapture %}
+          {% endif %}
+
+
+          <a href="{{ link }}">{{ item.Image }}</a>
+        </div>
+        {% endfor %}
+	  {% if itemsSize < 1 %}
+      <div class="item active">
+        <img class="img-responsive" src="/Themes/FG/Assets/img/Hero.jpg" />
+      </div>
+      {% endif %}
+      </div>
+
+{% if itemsSize > 1 %}
+    <!-- Controls -->
+    <a class="left carousel-control" href="#announcement-rotator" data-slide="prev">
+      <span class="fa fa-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#announcement-rotator" data-slide="next">
+      <span class="fa fa-chevron-right"></span>
+    </a>
+{% endif %}
+  </div>
+  
+  
