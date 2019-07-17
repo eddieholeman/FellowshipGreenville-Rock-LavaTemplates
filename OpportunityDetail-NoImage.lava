@@ -1,0 +1,27 @@
+
+
+
+<div class="row">
+
+    <div class="col-md-8">
+        <h2 class="margin-t-none"><i class='{{Opportunity.IconCssClass}}'></i> {{ Opportunity.Name }}</h2>
+        {{ Opportunity.Description }}
+
+        <p class="margin-t-lg">
+	        {% if LinkedPages.SignupPage != '' %}
+		        <a href="{{ LinkedPages.SignupPage }}?OpportunityId={{ Opportunity.Id }}" class="btn btn-success">I have a question</a>
+	        {% endif %}
+			{% if Person.FirstName %}
+				<a href="/application/serving/1" id="application_serving"><span class="btn btn-success">Serving Application</span></a>
+			{% else %}
+				<a href="/Login/servingapp" target="_self" id="login"><span class="btn btn-success">Serving Application</span></a>
+			{% endif %}	
+		
+        </p>
+
+    </div>
+</div>
+
+
+
+	
