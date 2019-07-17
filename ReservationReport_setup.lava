@@ -18,90 +18,54 @@
   <h1 style='{{titleStyle}}'> There are no reservations in this time frame.</h1>
   {% endif %}
 
-  {% for reservationDate in ReservationSummaries %} 
-  <br>
-  {% assign firstReservation = reservationDate | First %}
 
-	<h2 style='{{headerStyle}}'>
-		{{ firstReservation.CalendarDate }}
-	</h2>
 	<table>
 		<tbody>
 			<tr style='{{subHeaderStyle}}'>
-				<th class='col-xs-2'>
-					<b>Name</b>
+				<th>
+					<b>Location Name</b>
 				</th>
-				<th class='col-xs-2'>
-					<b>Event Time</b>
+				<th>
+					<b>Day</b>
 				</th>
-				<th class='col-xs-2'>
-					<b>Reservation Time</b>
+				<th>
+					<b>Reservation DateTime</b>
 				</th>
-				<th class='col-xs-2'>
-					<b>Locations</b>
+				<th>
+					<b>Event DateTime</b>
 				</th>
-				<th class='col-xs-2'>
-					<b>Resources</b>
+				<th>
+					<b>Reservation Name</b>
 				</th>
-				<th class='col-xs-1 hidden-xs hidden-sm'>
+				<th>
 					<b>Setup</b>
 				</th>
-				<th class='col-xs-1'>
-					<b>Status</b>
+				<th>
+					<b>Event Contact</b>
+				</th>
+				<th>
+					<b>Phone</b>
 				</th>
 			</tr>
+
+	<hr width='100%'>
+
+    {% for reservation in ReservationSummaries %}
+        {% for event in reservation %}
+            {% for room in event.Locations %}
+                <tr class="room-events {{ room.Location.Name | ToPascal }}">
+                    <td>{{ room.Location.Name }}</td>
+                    <td>{{ event.EventStartDateTime | Date:'ddd' }}</td>
+                    <td>{{ event.ReservationStartDateTime | Date:'M/d/yy h:mm tt' }} - {{ event.ReservationEndDateTime | Date:'h:mm tt' }}</td>
+                    <td>{{ event.EventStartDateTime | Date:'M/d/yy h:mm tt' }} - {{ event.EventEndDateTime | Date:'h:mm tt' }}</td>
+                    <td>{{ event.ReservationName }}</td>
+					<td>{{ room.AttributeValues }}</td>
+                    <td>{{ event.EventContactPersonAlias.Person.FullName }}</td>
+                    <td>{{ event.EventContactPhoneNumber }}</td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
 		</tbody>
 	</table>
-
-	<hr width='100%"'>
-	<table>			
-		<tbody>
-		{% for reservationSummary in reservationDate %}
-		    {% for reservation in ReservationSummaries %}
-				{% for event in reservation %}
-					{% for room in event.Locations %}
-
-		{% if reservationSummary.ApprovalState == 'Approved' %}
-			{% assign rowClass = itemNormalStyle %}
-		{% else %}
-			{% assign rowClass = itemUnapprovedStyle %}
-		{% endif %}
-		
-			<tr style='{{rowClass}}'>
-				<td><span>{{ reservationSummary.ReservationName }}</span></td>
-				<td><span>{{ reservationSummary.EventDateTimeDescription }}</span></td>
-				<td><span>{{ reservationSummary.ReservationDateTimeDescription }}</span></td>
-				<td><span>
-					<ul>
-					{% for reservationLocation in reservationSummary.Locations %}
-					<li>{{ reservationLocation.Location.Name }}{% if reservationLocation.ApprovalState == 2 %}<i class='fa fa-check'></i>{% endif %}</li>
-					{% endfor %}
-					</ul>
-				</span></td>
-				<td><span>
-					<ul>
-					{% for reservationResource in reservationSummary.Resources %}
-					<li>{{ reservationResource.Resource.Name }}({{reservationResource.Quantity}}) {% if reservationResource.ApprovalState == 2 %}<i class='fa fa-check'></i>{% endif %}</li>
-					{% endfor %}
-					</ul>
-				</span></td>
-				<td><span>
-					{{ room.AttributeValues }}
-				</span></td>
-				<td><span>
-					{{ reservationSummary.ApprovalState }}
-				</span></td>				
-			</tr>
-		{% if reservationSummary.Note != empty %}
-		<tr style='{{noteStyle}}'>
-		<td></td>
-		<td colspan='6'>{{reservationSummary.Note}}</td>
-		</tr>
-		{% endif %}
-		{% endfor %}
-		{% endfor %}
-		{% endfor %}
-		{% endfor %}
-		</tbody>
-	</table>
-  {% endfor %}
