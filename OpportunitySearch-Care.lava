@@ -1,0 +1,45 @@
+{% assign opportunityCount = Opportunities | Size %}
+
+{% if opportunityCount == 0 %}
+  <div class="panel panel-default margin-t-md">
+    <div class="margin-all-md"> There are no opportunities that match the criteria</div>
+  </div>
+{% endif %}
+
+  <div class="row care-row">
+
+  
+{% for opportunity in Opportunities %}
+  <div class="col-xs-6 col-md-6">
+  <!--<h4>{{ opportunity.Name }}</h4>-->
+    <div class="care-panel">
+	<div class="care-photo">
+          <img src="{{opportunity.PhotoUrl}}" class="img-responsive margin-b-md">
+      </div>
+      <div class="care-buttons">
+
+        <div class="care-summary">{{opportunity.Summary}}</div>
+				{% assign moreinfo = opportunity | Attribute:'MoreInfolink' %}
+		{% if moreinfo == '' %}
+		{% if DetailPage contains "?" %}
+			<a class="btn btn-default" href="{{ DetailPage }}&OpportunityId={{ opportunity.Id }}" role="button">Contact</a>
+		{% else %}
+			<a class="btn btn-default" href="{{ DetailPage }}?OpportunityId={{ opportunity.Id }}" role="button">Contact</a>
+		{% endif %}
+		{% endif %}
+		{% if moreinfo != '' %}
+		<a class="btn btn-default" <a href="{{ GlobalAtribute | PublicApplicationRoot }}{{ opportunity | Attribute:'MoreInfolink' }}" role="button">More Info</a>
+		{% endif %}
+		</div>
+    </div>
+	</div>
+{% endfor %}
+
+  </div>
+  
+  
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $('.js-group-item').tooltip();
+  });
+</script>
