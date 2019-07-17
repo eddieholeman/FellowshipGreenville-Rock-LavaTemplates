@@ -1,0 +1,30 @@
+{% for eventOccurrenceSummary in EventOccurrenceSummaries limit:1 %}
+ <h4>{{ eventOccurrenceSummary.DateTime | Date: 'MMMM' }}</h4>
+ {% endfor %}
+{% for eventOccurrenceSummary in EventOccurrenceSummaries %}
+  <div class="margin-b-lg">
+
+
+    {% if DetailsPage != empty %}
+      {% capture eventName %}<a href="{{ DetailsPage }}?EventOccurrenceId={{ eventOccurrenceSummary.EventItemOccurrence.Id }}">{{ eventOccurrenceSummary.Name }}</a>{% endcapture %}
+    {% else %}
+      {% assign eventName = eventOccurrenceSummary.Name %}
+    {% endif %}
+
+    <h4>{{ eventName }}<br />
+      <small>
+      {% if eventOccurrenceSummary.EventItemOccurrence.Schedule.EffectiveStartDate != eventOccurrenceSummary.EventItemOccurrence.Schedule.EffectiveEndDate %}
+        {{ eventOccurrenceSummary.EventItemOccurrence.Schedule.EffectiveStartDate  | Date: 'MMM d' }} -  {{ eventOccurrenceSummary.EventItemOccurrence.Schedule.EffectiveEndDate  | Date: 'MMM d'}}
+      {% else %}
+        {{ eventOccurrenceSummary.DateTime | Date: 'ddd, MMM d / h:mmtt' }}
+      {% endif %}
+		<a href="{{ DetailsPage }}?EventOccurrenceId={{ eventOccurrenceSummary.EventItemOccurrence.Id }}" class="btn btn-default">More</a>
+	 </small>
+	 
+    </h4>
+
+    {% comment %}
+	<p>{{ eventOccurrenceSummary.Summary }}</p>
+	{% endcomment %}
+  </div>
+{% endfor %}
