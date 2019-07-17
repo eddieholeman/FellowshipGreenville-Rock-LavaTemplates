@@ -1,0 +1,20 @@
+<div class='panel panel-default'>
+    <div class='panel-heading'>GO JOURNEYS</div>
+    <div class='panel-body'>
+
+        {% for item in GroupList %}
+  
+                    {{ item | Attribute:'OpportunityLocation' }}
+                    
+                    {% assign dateRangeParts = item | Attribute:'OpportunityDateRange','RawValue' | Split:',' %}
+                    {% assign dateRangePartsSize = dateRangeParts | Size %}
+                    {% if dateRangePartsSize == 2 %}
+                      {{ dateRangeParts[0] | Date:'MMMM dd, yyyy' }} to {{ dateRangeParts[1] | Date:'MMMM dd, yyyy' }}<br />
+                    {% elsif dateRangePartsSize == 1  %}      
+                      {{ dateRangeParts[0] | Date:'MMMM dd, yyyy' }}
+                    {% endif %}
+
+        {% endfor %}
+        
+    </div>
+</div>
