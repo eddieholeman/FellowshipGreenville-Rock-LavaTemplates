@@ -14,6 +14,8 @@
         {% assign detailURL = '' %}
         {% if redirectURL and redirectURL != empty %}{% assign detailURL = redirectURL %}{{}}{% else %}{% capture detailURL %}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{% endcapture %}{% endif %}
         <a href="{{ detailURL }}">{{ item | Attribute:'Image' }}</a>
+
+		 
       </div>
       {% endfor %}
       {% if itemsSize < 1 %}
@@ -23,6 +25,7 @@
       {% endif %}
     </div>
 {% endcomment %}
+
 
     <!-- Wrapper for slides -->
 	{% assign itemsSize = Items | Size %}
@@ -38,9 +41,13 @@
           {% if link == '' %}
               {% capture link %}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{% endcapture %}
           {% endif %}
-
-
-          <a href="{{ link }}">{{ item.Image }}</a>
+          {% assign video = item | Attribute:'Video' %}		  
+		  {% if video == ''%}
+			<a href="{{ link }}">{{ item.DetailImage }}</a>
+		  {% else %}
+			<a href="{{ link }}">{{ item.Video }}</a>
+		  {% endif %}
+		  
         </div>
         {% endfor %}
 	  {% if itemsSize < 1 %}
