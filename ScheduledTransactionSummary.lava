@@ -1,7 +1,7 @@
 <div class="row margin-b-md">
 
     <div class="col-md-6">
-        <h1 class="condensed">Hello, {{CurrentPerson.NickName}}</h1>
+        <h1 class="condensed">Hello {{CurrentPerson.NickName}}</h1>
     </div>
 
     <div class="col-md-6">
@@ -35,5 +35,6 @@
             <a class="btn btn-default pull-right" href="{{LinkedPages.TransactionHistoryPage}}">View History</a>
         </div>
         <a class="btn btn-primary btn-block margin-t-md" href="{{LinkedPages.TransactionEntryPage}}">Give Now</a>
+		<a class="btn btn-primary btn-block margin-t-md" href="/givinghelp">Need Help?</a>
     </div>
 </div>
