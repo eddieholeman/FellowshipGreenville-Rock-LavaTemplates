@@ -1,0 +1,30 @@
+﻿{% for item in Items %}
+<article class="margin-b-lg">
+
+
+
+    {% assign Person = item | Attribute:'PersonRecord','Object' %}
+	
+	        <div class="rst-missionaryimg">
+	{% assign overridepicture = item | Attribute:'Picture','RawValue' %}
+            {% if overridepicture and overridepicture != "" %}
+            <img src="/GetImage.ashx?guid={{ overridepicture }}" class="img-responsive" />
+            {% elseif Person.Photo and Person.PhotoId != " " %}
+            <img src="/GetImage.ashx?id={{ Person.PhotoId }}" class="img-responsive" />
+            {% elseif Person.Gender == 'Female' %}
+            <img src="/Assets/Images/person-no-photo-female.svg" class="img-responsive" />
+            {% else %}
+            <img src="/Assets/Images/person-no-photo-male.svg" class="img-responsive" />
+            {% endif %}
+			</div>
+
+
+	<h4> {{ Person.NickName }} {{ Person.LastName }}</h4>
+
+
+    
+    <div class="rst-missionarybio">{{ item | Attribute:'ExtendedBio' }}</div>
+		<div class="rst-missionarycontact">{% assign emailaddress = Person.Email %}	
+		
+
+{% endfor %}
