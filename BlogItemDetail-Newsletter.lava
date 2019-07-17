@@ -1,0 +1,21 @@
+﻿{% for item in Items %}
+<article class="margin-b-lg">
+
+  
+
+   <strong>Issue Date:</strong> {{ item.IssueDate }}<br /><br />
+   <strong>Global News Image:</strong> {{ item | Attribute:'GlobalNewsImage' }}<br /><br />
+   <strong>Global News Opportunity to Pray Text:</strong> {{ item.GlobalNewsOpportunitytoPrayText }}<br /><br />
+   <strong>Missionary Highlight Specific:</strong> {{ item.MissionaryHighlightSpecific }}<br /><br />
+   <strong>Missionary Highlight Image:</strong> {{ item | Attribute:'MissionaryHighlightImage' }}<br /><br />
+   <strong>Missionary Highlight Text:</strong> {{ item.MissionaryHighlightText}}<br /><br />
+   <strong>Opportunity to Pray Specific Ministry:</strong> {{ item.OpportunitytoPraySpecificMinistry }}<br /><br />
+   <strong>Opportunity to Pray Text:</strong> {{ item.OpportunitytoPrayText }}<br /><br />
+   <strong>Missionary and Partner Updates:</strong> {{ item.MissionaryandPartnerUpdates }}<br /><br />
+   <strong>City Involvement:</strong> {{ item.CityInvolvement }}<br /><br />
+   <strong>Opportunity to Serve Specific Ministry:</strong> {{ item.OpportunitytoServeSpecificMinistry }}<br /><br />
+   <strong>Opportunity to Serve Text:</strong> {{ item.OpportunitytoServeText }}<br /><br />   
+
+
+
+{% endfor %}
