@@ -8,6 +8,7 @@
 {{ opportunityPhotoUrl | AddMetaTagToHead:'property','twitter:image' }}
 {{ 'summary_large_image' | AddMetaTagToHead:'property','twitter:card' }}
 {% endif %}
+ 
 
 {% assign setPageTitleToOpportunityTitle = Block | Attribute:'SetPageTitletoOpportunityTitle','RawValue' %}
 {% if setPageTitleToOpportunityTitle != true %}
@@ -19,13 +20,42 @@
     {% assign dateRangePartsSize = dateRangeParts | Size %}
     {% if dateRangePartsSize == 2 %}
     {{ dateRangeParts[0] | Date:'MMMM dd, yyyy' }} to {{ dateRangeParts[1] | Date:'MMMM dd, yyyy' }}<br />
-    {% elsif dateRangePartsSize == 1  %}
+    {% elseif dateRangePartsSize == 1  %}
     {{ dateRangeParts[0] | Date:'MMMM dd, yyyy' }}
     {% endif %}
     {{ Group | Attribute:'OpportunityLocation' }}
+	
+
+
+
 </div>
 <div class='opportunity-summary'>
-    {{ Group | Attribute:'OpportunitySummary' }}
+    {{ Group | Attribute:'OpportunitySummary' }}<br />
+
+
+    {% assign appdateRangeParts = Group | Attribute:'ApplicationDateRange','RawValue' | Split:',' %}
+
+    {% assign appdateRangePartsSize = appdateRangeParts | Size %}
+    {% if appdateRangePartsSize == 2 %}
+    <br /><strong>Applications accepted from {{ appdateRangeParts[0] | Date:'MMMM dd, yyyy' }} to {{ appdateRangeParts[1] | Date:'MMMM dd, yyyy' }}.</strong><br /><br />
+    {% elseif appdateRangePartsSize == 1  %}
+    {{ appdateRangeParts[0] | Date:'MMMM dd, yyyy' }}
+    {% endif %}
+	{% if appdateRangePartsSize == 2 %}
+	{% assign daysTillAppStartDate = 'Now' | DateDiff:appdateRangeParts[0],'d' %}
+    {% assign daysTillAppEndDate = 'Now' | DateDiff:appdateRangeParts[1],'d' %}
+	{% if daysTillAppStartDate <= 0 and daysTillAppEndDate >= 0 %}
+	<a href="/application/missiontrip/1?GroupId={{ PageParameter:'GroupId'}}" target="_blank"><span class="btn btn-default">Apply for Trip</span></a><br />
+	<p>If you are applying for your child who is under the age of 13, please <a href="/staff/contact/14859?Inquiry=Please%20provide%20login%20for%20my%20child%20in%20order%20to%20apply%20for%20a%20mission%20trip." target="_blank"><span class="btn btn-default">contact us</a></p>
+	{% endif %}
+	{% endif %}
+	
+    {% assign contributionslink = Group | Attribute:'ThirdPartyWebsiteLinkContributions','RawValue' %}
+	{% if contributionslink != '' %}
+		<br /><a href="{{ contributionslink }}" target="_blank"><span class="btn btn-default">Donate via Partner</span></a>
+	{% endif %}
+
+	
 </div>
 {% comment %}
 <ul class='socialsharing margin-b-lg'>
