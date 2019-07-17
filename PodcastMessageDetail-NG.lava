@@ -1,0 +1,61 @@
+<style>
+	
+</style>
+
+{% assign item = Items | First %}
+{% if item  %}
+	
+	{% assign videoLink = item | Attribute:'Podcast_Video','RawValue' %}
+	{% assign videoEmbed = item | Attribute:'Podcast_VimeoPlayer','RawValue' %}
+	{% assign audioLink = item | Attribute:'Podcast_Audio','Url' %}
+	{% assign notesLink = item | Attribute:'Podcast_SermonNotes','RawValue' %}
+	{% assign subtitle = item | Attribute:'Podcast_MessageSeries','RawValue' %}
+	{% assign onscreen = item | Attribute:'Podcast_OnscreenNotes','RawValue' %}
+	
+
+
+	<article class="message-detail">
+		{% if videoEmbed != '' %}
+			<div class="embed-responsive embed-responsive-16by9"><iframe src="{{ videoEmbed }}" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+		{% endif %}
+		<h1>{{ item.Title }}</h1>
+		<h3>{{ subtitle }}</h3>
+			<p>
+			<strong> {{ item | Attribute:'Podcast_Author' }} - {{ item.StartDateTime | Date:'M/d/yyyy' }}</strong>
+		</p>
+	
+		<div class="row">
+			<div class="col-md-8">
+				{{ item.Content }}
+			</div>
+			<div class="col-md-4">
+				{% if videoLink != '' or notesLink != '' or onscreen != '' or audioLink != '' %}
+					<div class="panel panel-default">
+						<div class="panel-heading">Downloads &amp; Resources</div>
+						<div class="list-group">
+							
+							{% if videoLink != '' %}
+								<a href="{{ videoLink }}" class="list-group-item"><i class="fa fa-film"></i> Video</a>
+							{% endif %}
+							
+							{% if audioLink != '' %}
+								<a href="{{ audioLink }}" class="list-group-item"><i class="fa fa-volume-up"></i> Audio</a>
+							{% endif %}
+
+                            {% if notesLink != '' %}
+                            <a href="{{ notesLink }}" class="list-group-item"><i class="fa fa-file-text-o"></i> Sermon Notes</a>
+                            {% endif %}
+							{% if notesLink != '' %}
+                            <a href="{{ onscreen }}" class="list-group-item"><i class="fa fa-file-text-o"></i> Onscreen Notes</a>
+                            {% endif %}
+							
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</article>
+	
+{% else %}
+	<h1>Could not find message.</h1>
+{% endif %}
