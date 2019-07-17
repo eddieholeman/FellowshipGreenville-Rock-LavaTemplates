@@ -1,0 +1,16 @@
+  <ul class="list-unstyled">
+    {% for occurrence in EventItemOccurrences %}
+    <li>
+	<div class="events-when">
+          {{ occurrence.Schedule.iCalendarContent | DatesFromICal | First | Date: 'M/d, hh:mm tt'  }}</div> <div class="events-separator">|</div>
+      {% if occurrence.EventItem.DetailsUrl != '' %}
+      <a href="{{ occurrence.EventItem.DetailsUrl }}">
+        {% else %}
+        <a href="{{ EventDetailPage }}?EventOccurrenceId={{ occurrence.Id }}">
+          {% endif %}
+ <div class="events-what">Register</div>
+        </a>  <div class="events-separator">|</div> <div class="events-where">{{ occurrence.Location }}</div>
+
+      </li>
+    {% endfor %}
+  </ul>
