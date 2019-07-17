@@ -1,9 +1,11 @@
-﻿{% assign percentWidth = PercentMet %}
+﻿{% assign thirdpartylink = Group | Attribute:'ThirdPartyWebsiteLink' %}
+{% assign percentWidth = PercentMet %}
 {% if percentWidth > 100 %}
   {% assign percentWidth = 100 %}
 {% endif %}
 {% assign percentRounded = PercentMet | Floor %}
 
+{% if thirdpartylink == '' %}
 <div class='well margin-t-md'>
     <div class='row'>
         <div class='col-md-9'>
@@ -12,7 +14,7 @@
                 Fundraising Progress
             </label>
             <label class='pull-right'>
-                {% if AmountLeft >= 0 %}
+			{% if AmountLeft >= 0 %}
                 {{ AmountLeft | FormatAsCurrency }}
                 {% else %}
                 {{ percentRounded }}%
@@ -33,3 +35,6 @@
         </div>
     </div>
 </div>
+{% else %}
+<p> </p>
+{% endif %}
