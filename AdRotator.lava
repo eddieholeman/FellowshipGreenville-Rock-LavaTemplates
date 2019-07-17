@@ -1,4 +1,4 @@
-﻿<div id="announcement-rotator" class="carousel slide" data-ride="carousel">
+<div id="announcement-rotator" class="carousel slide" data-ride="carousel">
 
 {% comment %}
   <!-- Wrapper for slides -->
