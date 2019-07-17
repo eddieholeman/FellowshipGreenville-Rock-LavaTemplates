@@ -1,0 +1,26 @@
+<div class="module">
+  <header class="clearfix">
+  {% comment %}
+    <img src="/Themes/NewCovenant_v1/Assets/Images/icon_calendar.png" />
+  {% endcomment %}
+    <h4>{{ ListTitle }}</h4>
+  </header>
+
+  <ul class="list-unstyled">
+    {% for occurrence in EventItemOccurrences %}
+    <li>
+	<div class="events-when">{{ occurrence.Schedule.iCalendarContent | DatesFromICal | First | Date: 'M/d, h:mm tt'  }}</div> 
+	<div class="events-separator">|</div>
+    {% if occurrence.EventItem.DetailsUrl != '' %}
+    <a href="{{ occurrence.EventItem.DetailsUrl }}">
+    {% else %}
+    <a href="{{ EventDetailPage }}?EventOccurrenceId={{ occurrence.Id }}">
+    {% endif %}
+ 	<div class="events-what">{{ occurrence.EventItem.Name }}</div></a>
+	<div class="events-separator">|</div>
+	<div class="events-partner">{{ occurrence.Note }}</div>
+	<div class="events-where">&#91;{{ occurrence.Location }}&#93;</div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
