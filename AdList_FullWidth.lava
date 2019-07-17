@@ -1,0 +1,16 @@
+﻿<div class="clearfix">{% assign itemSize = Items | Size %}
+  {% for item in Items %}
+  <div class="col-full-{{itemSize}} adfull">
+  {% comment %}
+      {% assign redirectURL = item | Attribute:'RedirectURL','RawValue' %}
+      {% assign detailURL = '' %}
+      {% if redirectURL and redirectURL != empty %}{% assign detailURL = redirectURL %}{{}}{% else %}{% capture detailURL %}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{% endcapture %}{% endif %}
+	{% endcomment %}
+	  {% assign redirectURL = item | Attribute:'ExternalLink','RawValue' %}
+      {% assign detailURL = '' %}
+      {% if redirectURL and redirectURL != empty %}{% assign detailURL = redirectURL %}{{}}{% else %}{% capture detailURL %}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{% endcapture %}{% endif %}
+
+      <a href="{{ detailURL }}">{{ item | Attribute:'Image' }}</a>
+  </div>
+  {% endfor -%}
+</div>
