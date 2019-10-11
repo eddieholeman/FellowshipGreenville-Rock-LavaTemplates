@@ -1,13 +1,14 @@
 ﻿{% for item in Items %}
 <article class="margin-b-lg">
 
-  <h3>{{ item.Title }}</h3>
+  
+	<h4>{{ item.Title }}</h4>
   <h5>by {{ item | Attribute:'Author' }}</h5>
-    
-    <div>
+  <div class="story-img">
         {{ item | Attribute:'Image' }}
     </div>
-    
+   <div class="story-text">
     {{ item.Content }}
+	</div>
 
 {% endfor %}
