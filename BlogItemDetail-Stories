@@ -1,4 +1,4 @@
-<style>
+﻿<style>
 	.series {
 		border: 1px solid rgba(0, 0, 0, .3);
 		position: relative;
@@ -54,6 +54,10 @@
 	.badge-icon {
 	    float: right;
 	}
+	.page-numbering {
+	    text-align: center;
+	    display: inline;
+	}
 	
 </style>
 
@@ -93,15 +97,17 @@
 {% endfor -%}
 </div>
 
-
+{% assign total = Pagination.TotalPages %}
+{% assign currentPageString = Pagination.CurrentPage | ToString %}
 {% if Pagination.TotalPages > 1 %}
+
 <div class="margin-t-lg">
   {% assign nextPageString = Pagination.NextPage | ToString %}
   {% assign prevPageString = Pagination.PreviousPage | ToString %}
+  <div class="page-numbering"><h4>Page {{ currentPageString }} of {{ total }}</h4></div>
 
   {% if {{Pagination.PreviousPage == -1 }} %}
-  <div class="btn btn-default pull-left">
-    <i class="fa fa-chevron-left"></i> Prev
+  
   </div>
   {% else %}
   <a class="btn btn-primary pull-left" href="{{Pagination.UrlTemplate | Replace:'PageNum', prevPageString}}">
@@ -110,8 +116,7 @@
   {% endif %}
 
   {% if {{Pagination.NextPage == -1 }} %}
-  <div class="btn btn-default pull-right">
-    Next <i class="fa fa-chevron-right"></i>
+ 
   </div>
   {% else %}
   <a class="btn btn-primary pull-right" href="{{Pagination.UrlTemplate | Replace:'PageNum', nextPageString}}">
