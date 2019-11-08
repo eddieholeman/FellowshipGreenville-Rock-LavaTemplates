@@ -1,0 +1,55 @@
+{%- assign channelTitleSize  =  ContentChannel | Attribute:'TitleSize' | Default:'h1' -%}
+{%- assign channelContentAlignment  =  ContentChannel | Attribute:'ContentAlignment' | Default:'left' -%}
+{%- assign textAlignment = channelContentAlignment | Downcase | Prepend:'text-' -%}
+{%- assign channelForegroundColor  =  ContentChannel | Attribute:'ForegroundColor' -%}
+{%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
+{%- assign channelBackgroundImage =  ContentChannel | Attribute:'BackgroundImage','RawValue' -%}
+{%- assign contentItemStyle = '' -%}
+
+{% stylesheet id:'contentcomponent-card' %}
+.contentComponent-card .row {
+  padding: 120px 0;
+}
+
+.bg-cover {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+{% endstylesheet %}
+
+<section class="contentComponent contentComponent-card">
+<div class="row bg-cover" style="background-image:url('/GetImage.ashx?Guid={{ channelBackgroundImage }}');">
+
+    {%- for item in Items -%}
+        {%- assign length = forloop.length -%}
+        {%- case length -%}
+          {%- when 1 -%}
+          {%- assign cardWidth = 'col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1' -%}
+          {% when 2 %}
+          {%- assign cardWidth = 'col-md-6 col-sm-6' -%}
+          {% when 3 %}
+          {%- assign cardWidth = 'col-md-4 col-sm-6' -%}
+          {%- else -%}
+          {%- assign cardWidth = 'col-md-3 col-sm-6' -%}
+        {%- endcase -%}  
+        {%- if channelBackgroundColor != '' -%}
+            {%- capture contentItemStyle -%}{{ contentItemStyle }}background-color:{{ channelBackgroundColor }};{%- endcapture -%}
+        {%- endif -%}
+        {%- if channelForegroundColor != '' -%}
+            {%- capture contentItemStyle -%}{{ contentItemStyle }}color:{{ channelForegroundColor }};{%- endcapture -%}
+        {%- endif -%}
+        {%- assign imageGuid = item | Attribute:'Image','RawValue' -%}
+    
+    
+        <div class="{{ cardWidth }}"><div class="card panel" {% if contentItemStyle != '' %}style='{{ contentItemStyle }}'{% endif %}>
+            {%- if imageGuid != '' -%}
+                <img alt="{{ item.Title }}" src="/GetImage.ashx?Guid={{ imageGuid }}&w=400" class="card-img-top img-responsive">
+            {%- endif -%}
+          <div class="card-body panel-body">
+            <{{ channelTitleSize }} class="card-title margin-all-none {% if textAlignment != '' %}{{ textAlignment }}{% endif %}">{{ item.Title }}</{{ channelTitleSize }}>
+            {{ item.Content }}
+          </div>
+        </div></div>
+    {%- endfor -%}
+</div>
+</section>
