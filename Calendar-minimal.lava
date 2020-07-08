@@ -1,0 +1,45 @@
+  {% assign eventItemOccurrenceCount = EventItemOccurrences | Size %}
+
+  {% if eventItemOccurrenceCount == 0 %}
+   {% assign eventItemOccurrenceCount = EventItemOccurrences | Size %}
+
+  {% if eventItemOccurrenceCount == 0 %}
+  <div class="panel panel-default margin-t-md">
+    <div class="margin-all-md"> There are no events in this time frame.</div>
+  </div>
+  {% endif %}
+
+  {% for eventItemOccurrence in EventItemOccurrences %}
+  <div class="panel panel-default margin-t-md">
+    <div class="panel-heading clearfix">
+      <h2 class="panel-title pull-left">
+        {{ eventItemOccurrence.Name }}
+      </h2>
+      <div class="pull-right">
+		{% if eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveStartDate != eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveEndDate %}
+            {{ eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveStartDate  | Date: 'ddd, MMM d' }} / {{ eventItemOccurrence.Time}}
+          {% else %}
+            {{ eventItemOccurrence.Date | Date: 'ddd, MMM d'}} / {{ eventItemOccurrence.Time}}
+          {% endif %} 
+        {% if eventItemOccurrence.DetailPage != null %}
+        <a href="{{ eventItemOccurrence.DetailPage }}">
+         <i>View More <i class="fa fa-chevron-right"></i>
+        </a>
+		{% else %}
+		<a href="{{ DetailsPage }}?EventOccurrenceId={{ eventItemOccurrence.EventItemOccurrence.Id }}">
+            <i>View More <i class="fa fa-chevron-right"></i>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+   </div>
+ 
+  {% endfor %}
+
+<script type="text/javascript">
+
+  $( document ).ready(function() {
+  $('.js-group-item').tooltip();
+  });
+
+</script>
