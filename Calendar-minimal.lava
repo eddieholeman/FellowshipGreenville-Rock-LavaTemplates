@@ -1,9 +1,6 @@
   {% assign eventItemOccurrenceCount = EventItemOccurrences | Size %}
 
   {% if eventItemOccurrenceCount == 0 %}
-   {% assign eventItemOccurrenceCount = EventItemOccurrences | Size %}
-
-  {% if eventItemOccurrenceCount == 0 %}
   <div class="panel panel-default margin-t-md">
     <div class="margin-all-md"> There are no events in this time frame.</div>
   </div>
@@ -17,7 +14,7 @@
       </h2>
       <div class="pull-right">
 		{% if eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveStartDate != eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveEndDate %}
-            {{ eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveStartDate  | Date: 'ddd, MMM d' }} / {{ eventItemOccurrence.Time}}
+            {{ eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveStartDate  | Date: 'ddd, MMM d' }} -  {{ eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveEndDate  | Date: 'ddd, MMM d'}}
           {% else %}
             {{ eventItemOccurrence.Date | Date: 'ddd, MMM d'}} / {{ eventItemOccurrence.Time}}
           {% endif %} 
