@@ -1,0 +1,120 @@
+﻿<style>
+	.series {
+		border: 1px solid rgba(0, 0, 0, .3);
+		position: relative;
+	}
+		
+	.series h1 {
+		font-size: 18px;
+		font-weight: 600;
+		margin-top: 4px;
+		margin-bottom: 0;
+	}
+	
+	.series-dates {
+		opacity: 1;
+	}
+	
+	.series-body {
+		padding: 10px;
+		height: 240px;
+	}
+	
+	.series-summary {
+		overflow: hidden;
+		margin-bottom: 5px;
+	}
+		
+	
+	.series-image {
+		height: 200px;
+		width: 100%;
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+	
+	
+	
+	.badge-icon {
+	    float: right;
+	}
+	.page-numbering {
+	    text-align: center;
+	    display: inline;
+	}
+	
+</style>
+
+<div class="row margin-t-lg">
+	{% for item in Items %}
+	{% assign seriesImageGuid = item | Attribute:'SeriesImage','RawValue' %}
+	{% assign videoid = item | Attribute:'Podcast_VideoID','RawValue' %}
+	 {%- assign itemPrimarySlug = item.PrimarySlug | Trim -%}
+  {%- if LinkedPages.DetailPage contains '{Slug}' and itemPrimarySlug != '' -%}
+    {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.PrimarySlug | Prepend:'/' -%}
+  {%- else -%}
+    {%- if LinkedPages.DetailPage contains '{Slug}' -%}
+      {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.Id | Prepend:'/' -%}
+    {%- else -%}
+      {%- capture itemLink -%}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{%- endcapture -%}
+    {%- endif -%}
+    {%- endif -%}
+	
+	<div class="col-md-4 col-sm-4 margin-b-md">
+	<article class="series">
+			
+			{% if detailImageGuid != '' %}
+				<div class="series-image" style="background-image: url('/GetImage.ashx?Guid={{ seriesImageGuid }}');" ></div>
+			{% endif %}
+		
+		  
+			<div class="series-body">
+			
+			{% if videoid != '' -%}
+			
+		         <p><a href="{{ itemLink }}"><i class="badge-icon fa fa-video" style="color:#13385f;"></i></p></a>
+		    {% else -%}
+		        <p><a href="{{ itemLink }}"><i class="badge-icon fa fa-file-alt" style="color:#585858;"></i></p></a>
+		    {% endif %}
+		    
+			<h1><a href="{{ itemLink }}">{{ item.Title }} </h1></a>
+				{[ contentChannelItemTags contentchannelitemid:'{{ item.Id }}' ]}
+				<p class="series-summary text-color">
+					{{ item | Attribute:'Summary'}} | {{ item | Attribute:'ContentTime'}}
+				</p>
+			</div>
+		</article>
+		
+	</div>
+{%- endfor -%}	
+</div>
+
+{% assign total = Pagination.TotalPages %}
+{% assign currentPageString = Pagination.CurrentPage | ToString %}
+{% if Pagination.TotalPages > 1 %}
+
+<div class="margin-t-lg">
+  {% assign nextPageString = Pagination.NextPage | ToString %}
+  {% assign prevPageString = Pagination.PreviousPage | ToString %}
+  <div class="page-numbering"><h4>Page {{ currentPageString }} of {{ total }}</h4></div>
+
+  {% if {{Pagination.PreviousPage == -1 }} %}
+  
+  </div>
+  {% else %}
+  <a class="btn btn-primary pull-left" href="{{Pagination.UrlTemplate | Replace:'PageNum', prevPageString}}">
+    <i class="fa fa-chevron-left"></i> Prev
+  </a>
+  {% endif %}
+
+  {% if {{Pagination.NextPage == -1 }} %}
+ 
+  </div>
+  {% else %}
+  <a class="btn btn-primary pull-right" href="{{Pagination.UrlTemplate | Replace:'PageNum', nextPageString}}">
+    Next <i class="fa fa-chevron-right"></i>
+  </a>
+  {% endif %}
+</div>
+{% endif %}
