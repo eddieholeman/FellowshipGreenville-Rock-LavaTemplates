@@ -1,0 +1,25 @@
+<h4 class='margin-t-none'>{{ Group.Name }}</h4>
+
+<div class='margin-b-sm'>
+{% for attribute in Group.AttributeValues %}
+    <strong>{{ attribute.AttributeName }}:</strong> {{ attribute.ValueFormatted }} <br />
+{% endfor %}
+</div>
+
+<div class='margin-v-sm'>
+{% if Location.FormattedHtmlAddress && Location.FormattedHtmlAddress != '' %}
+	{{ Location.FormattedHtmlAddress }}
+{% endif %}
+</div>
+
+{% if LinkedPages.GroupDetailPage and LinkedPages.GroupDetailPage != '' %}
+    <a class='btn btn-xs btn-action margin-r-sm' href='{{ LinkedPages.GroupDetailPage }}?GroupId={{ Group.Id }}'>View {{ Group.GroupType.GroupTerm }}</a>
+{% endif %}
+
+{% if LinkedPages.RegisterPage and LinkedPages.RegisterPage != '' %}
+    {% if LinkedPages.RegisterPage contains '?' %}
+        <a class='btn btn-xs btn-action' href='{{ LinkedPages.RegisterPage }}&GroupGuid={{ Group.Guid }}'>Register</a>
+    {% else %}
+        <a class='btn btn-xs btn-action' href='{{ LinkedPages.RegisterPage }}?GroupGuid={{ Group.Guid }}'>Register</a>
+    {% endif %}
+{% endif %}
