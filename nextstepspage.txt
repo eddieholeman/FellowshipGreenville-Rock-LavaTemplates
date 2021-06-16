@@ -1,0 +1,64 @@
+<div class="d-none d-md-block">
+<div class="row"><div class="col-md-4">
+<a href="https://www.fellowshipgreenville.org/startingpoint"><img src="/Content/ExternalSite/NextSteps/StartingPoint.jpg" style="width: 100%;" alt="StartingPoint.jpg"></a>
+    </div>
+    <div class="col-md-4">
+        <a href="https://www.fellowshipgreenville.org/membership"><img src="/Content/ExternalSite/NextSteps/Membership.jpg" style="width: 100%;" alt="Membership.jpg"></a>
+    </div>
+    <div class="col-md-4">
+        <a href="https://www.fellowshipgreenville.org/baptism"><img src="/Content/ExternalSite/NextSteps/Baptism.jpg" style="width:100%;" alt="Baptism.jpg"></a>
+    </div>
+</div>
+ <p></p>
+<div class="row"><div class="col-md-4">
+<a href="https://www.fellowshipgreenville.org/readingplan"><img src="/Content/ExternalSite/NextSteps/Bible_Reading_Plan.jpg" style="width: 100%;" alt="BibleReadingPlan.jpg"></a>
+    </div>
+    <div class="col-md-4">
+        <a href="https://www.fellowshipgreenville.org/care/counseling"><img src="/Content/ExternalSite/NextSteps/Receive_Counseling.jpg" style="width: 100%;" alt="Counseling.jpg"></a>
+    </div>
+    <div class="col-md-4">
+        <a href="https://www.fellowshipgreenville.org/study"><img src="/Content/ExternalSite/NextSteps/Join_Bible_Study.jpg" style="width:100%;" alt="JoinAStudy.jpg"></a>
+    </div>
+    </div>
+   <p></p> 
+<div class="row"><div class="col-md-4">
+<a href="https://www.fellowshipgreenville.org/communitylife"><img src="/Content/ExternalSite/NextSteps/Join_Community_Group.jpg" style="width: 100%;" alt="JoinAGroup.jpg"></a>
+    </div>
+    <div class="col-md-4">
+        <a href="https://www.fellowshipgreenville.org/care"><img src="/Content/ExternalSite/NextSteps/Get_Care___Personal_Support.jpg" style="width: 100%;" alt="Care.jpg"></a>
+    </div>
+    <div class="col-md-4">
+        <a href="https://www.fellowshipgreenville.org/serve"><img src="/Content/ExternalSite/NextSteps/Serve.jpg" style="width:100%;" alt="Serve.jpg"></a>
+    </div>
+</div>
+</div>
+
+<div class="d-block d-sm-block d-md-none">
+<p style="text-align:center">
+<a href="https://www.fellowshipgreenville.org/startingpoint"><img src="/Content/ExternalSite/NextSteps/StartingPoint.jpg" style="width: 75%;" alt="StartingPoint.jpg"></a></p>
+
+<p style="text-align:center">
+<a href="https://www.fellowshipgreenville.org/membership"><img src="/Content/ExternalSite/NextSteps/Membership.jpg" style="width: 75%;" alt="Membership.jpg"></a></p>
+
+<p style="text-align:center">
+<a href="https://www.fellowshipgreenville.org/baptism"><img src="/Content/ExternalSite/NextSteps/Baptism.jpg" style="width:75%;" alt="Baptism.jpg"></a></p>
+
+<p style="text-align:center">
+<a href="https://www.fellowshipgreenville.org/readingplan"><img src="/Content/ExternalSite/NextSteps/Bible_Reading_Plan.jpg" style="width: 75%;" alt="BibleReadingPlan.jpg"></a></p>
+
+<p style="text-align:center">
+<a href="https://www.fellowshipgreenville.org/care/counseling"><img src="/Content/ExternalSite/NextSteps/Receive_Counseling.jpg" style="width: 75%;" alt="Counseling.jpg"></a></p>
+
+<p style="text-align:center">
+<a href="https://www.fellowshipgreenville.org/biblestudies"><img src="/Content/ExternalSite/NextSteps/Join_Bible_Study.jpg" style="width:75%;" alt="JoinAStudy.jpg"></a></p>
+
+<p style="text-align:center">
+<a href="https://www.fellowshipgreenville.org/communitylife"><img src="/Content/ExternalSite/NextSteps/Join_Community_Group.jpg" style="width: 75%;" alt="JoinAGroup.jpg"></a></p>
+
+<p style="text-align:center">
+<a href="https://www.fellowshipgreenville.org/care"><img src="/Content/ExternalSite/NextSteps/Get_Care___Personal_Support.jpg" style="width: 75%;" alt="Care.jpg"></a></p>
+
+<p style="text-align:center">
+ <a href="https://www.fellowshipgreenville.org/serve"><img src="/Content/ExternalSite/NextSteps/Serve.jpg" style="width:75%;" alt="Serve.jpg"></a></p>
+ </div>
+<p></p>
