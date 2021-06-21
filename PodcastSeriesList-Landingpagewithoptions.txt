@@ -1,0 +1,167 @@
+<style>
+
+	.series {
+		height: 400px;
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+	
+	@media (min-width: 992px) {
+		.series {
+			height: 420px;
+		}
+	}
+	
+	.series h1 {
+		background-color: rgba(0, 0, 0, 0.3);
+		text-align: center;
+		font-size: 16px;
+		font-weight: 600;
+		color: #fff;
+		margin: 0;
+		padding: 3px;
+	}
+
+	.series {
+		position: relative;
+	}
+		
+	.series h1 {
+		font-size: 20px;
+		font-weight: 600;
+		margin-top: 4px;
+		margin-bottom: 0;
+	}
+	
+	.series-dates {
+		opacity: .6;
+	}
+	
+	.series-body {
+		padding: 15px;
+		height: 180px;
+	}
+	
+	.series-summary {
+		height: 100px;
+		overflow: hidden;
+	}
+	
+	.series-image {
+		height: 300px;
+		width: 100%;
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+	
+	.podcast-link:hover {
+		text-decoration: none;
+		background: #CAE2BF;
+	}
+	
+	.podcast-link {
+		font-size: 13px;
+		text-color: #7bb861; 
+	}
+	
+	.messages {
+		font-size: 18px;
+	}
+    
+</style>
+
+{% assign Series = Items | Size %}
+{% assign SeriesImageGuid = currentSeries | Attribute:'SeriesImage','RawValue' %}
+
+
+{% comment %}
+{% if Pagination.CurrentPage == 1 %}
+
+  <header class="series" style="background-image: url('/GetImage.ashx?Guid={{ SeriesImageGuid }}')">
+	  <h1>Current Series</h1>
+  </header>
+
+{% endif %}
+{% endcomment %}
+
+<div class="row margin-t-lg">
+	{% for item in Items %}
+	{% assign seriesImageGuid = item | Attribute:'SeriesImage','RawValue' %}
+	{% assign spotify = item | Attribute:'Spotify','RawValue' %}
+    {% assign appstore = item | Attribute:'AppStore','RawValue' %}
+    {% assign itunes = item | Attribute:'iTunes','RawValue' %}
+    {% assign messages = item.ChildItems | Size %}
+
+ <div class="col-md-4 col-sm-6">
+
+	<article class="series-detail">
+	    
+		{% if detailImageGuid != '' %}
+			<div class="series-image" style="background-image: url('/GetImage.ashx?Guid={{ seriesImageGuid }}');" >
+			</div>
+		{% endif %}
+			
+			<div class="series-body">
+				<h3 class="text-color">{{ item.Title }}</h3>
+				<p class="series-dates text-color">
+					{{ item.Summary }} 
+				</p>
+			 
+	            
+	            {% if spotify != '' or appstore != '' or itunes != '' or listennow != '' %}
+	                <div class="list-group">
+		       			{% if spotify != '' %}
+								<a class="podcast-link" href="{{ spotify }}">&nbsp; <i class="fab fa-spotify"></i>SPOTIFY </a>
+							{% endif %}
+
+                            {% if appstore != '' %}
+								<a class="podcast-link" href="{{ appstore }}">&nbsp; <i class="fab fa-app-store-ios"></i> APP STORE </a>
+							{% endif %}
+							
+                            {% if itunes != '' %}
+								<a class="podcast-link" href="{{ itunes }}" >&nbsp; <i class="fab fa-itunes"></i>ITUNES </a>
+                            {% endif %}
+                           
+                            {% if messages != '0' %}
+								<a class="podcast-link" href="{{ LinkedPages.DetailPage }}?Item={{ item.Id }}">&nbsp; <i class="fas fa-podcast"></i>LISTEN NOW</a>
+                            {% endif %}
+                     </div>       
+		        {% endif %}
+		        
+	        </div>
+    </article>
+		
+</div>
+	
+{% endfor -%}
+</div>
+
+
+{% if Pagination.TotalPages > 1 %}
+<div class="margin-t-lg">
+  {% assign nextPageString = Pagination.NextPage | ToString %}
+  {% assign prevPageString = Pagination.PreviousPage | ToString %}
+
+  {% if {{Pagination.PreviousPage == -1 }} %}
+  <div class="btn btn-default pull-left">
+    <i class="fa fa-chevron-left"></i> Prev
+  </div>
+  {% else %}
+  <a class="btn btn-primary pull-left" href="{{Pagination.UrlTemplate | Replace:'PageNum', prevPageString}}">
+    <i class="fa fa-chevron-left"></i> Prev
+  </a>
+  {% endif %}
+
+  {% if {{Pagination.NextPage == -1 }} %}
+  <div class="btn btn-default pull-right">
+    Next <i class="fa fa-chevron-right"></i>
+  </div>
+  {% else %}
+  <a class="btn btn-primary pull-right" href="{{Pagination.UrlTemplate | Replace:'PageNum', nextPageString}}">
+    Next <i class="fa fa-chevron-right"></i>
+  </a>
+  {% endif %}
+</div>
+{% endif %}
