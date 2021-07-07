@@ -22,13 +22,13 @@
 				{% assign moreinfo = opportunity | Attribute:'MoreInfolink' %}
 		{% if moreinfo == '' %}
 		{% if DetailPage contains "?" %}
-			<a class="btn btn-default" href="{{ DetailPage }}&OpportunityId={{ opportunity.Id }}" role="button">Contact</a>
+			<a class="btn btn-fg-open" href="{{ DetailPage }}&OpportunityId={{ opportunity.Id }}" role="button">Contact</a>
 		{% else %}
-			<a class="btn btn-default" href="{{ DetailPage }}?OpportunityId={{ opportunity.Id }}" role="button">Contact</a>
+			<a class="btn btn-fg-open" href="{{ DetailPage }}?OpportunityId={{ opportunity.Id }}" role="button">Contact</a>
 		{% endif %}
 		{% endif %}
 		{% if moreinfo != '' %}
-		<a class="btn btn-default" <a href="{{ GlobalAtribute | PublicApplicationRoot }}{{ opportunity | Attribute:'MoreInfolink' }}" role="button">More Info</a>
+		<a class="btn btn-fg-open" <a href="{{ GlobalAtribute | PublicApplicationRoot }}{{ opportunity | Attribute:'MoreInfolink' }}" role="button">More Info</a>
 		{% endif %}
 		</div>
     </div>
