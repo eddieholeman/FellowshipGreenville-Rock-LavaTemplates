@@ -1,0 +1,29 @@
+{% assign item = Items | First %}
+{% if item  %}
+	
+	{% assign storyimage = item | Attribute:'Image','RawValue' %}
+	{% assign videoid = item | Attribute:'VimeoId','RawValue' %}
+	{% assign isNumericVideoID =  item | Attribute:'VimeoId' | RegExMatch:'^[0-9]*$' %}
+	
+<article class="margin-b-lg">
+
+  {% if videoid != '' %}
+			<div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/{{ videoid }}" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+			{% else -%}
+			 <div class="story-img">
+        {{ item | Attribute:'Image' }}
+    </div>
+		{% endif %}
+
+{% assign author2 = item | Attribute:'Author2' %}
+{% assign video2 = item | Attribute:'LongVideo','URL' %}
+	<h4>{{ item.Title }}</h4>
+  <h5>by {{ item | Attribute:'Author' }} {% if author2 != '' %} & {{ author2 }}{% endif %}</h5>
+   <div class="story-text">
+    {{ item.Content }}
+    {% if video2 != '' %} Want to see the full version of this video? <a href="{{ video2 }}" target="_blank"><span class="btn btn-default" style="padding: 5px 10px; font-size: 18px;">Full Video</span></a> {% endif %}
+	</div>
+
+{% endif%}
+
+<p><a href="https://www.fellowshipgreenville.org/sharemystory"><span class="btn btn-special-purple1" style="float: right; padding: 4px 8px; font-size: 16px;">Share My Story</span></a></p>
