@@ -1,4 +1,5 @@
 {% assign opportunityCount = Opportunities | Size %}
+{% assign order = Opportunities | SortByAttribute: 'Priority' %}
 
 {% if opportunityCount == 0 %}
   <div class="panel panel-default margin-t-md">
@@ -6,33 +7,38 @@
   </div>
 {% endif %}
 
-  <div class="row care-row">
 
-  
-{% for opportunity in Opportunities %}
-  <div class="col-xs-6 col-md-6">
-  <!--<h4>{{ opportunity.Name }}</h4>-->
-    <div class="care-panel">
+<div class="row care-row">
+
+{% for opportunity in order %}
+{% assign priority = opportunity | Attribute:'Priority' | AsInteger %}
+{% if priority > 2 %}
+  <div class="col-md-4">
+ <!--<h4>{{ opportunity.Name }}</h4>--> 
+   <p><div class="care-panel-1">
 	<div class="care-photo">
           <img src="{{opportunity.PhotoUrl}}" class="img-responsive margin-b-md">
       </div>
-      <div class="care-buttons">
-
-        <div class="care-summary">{{opportunity.Summary}}</div>
-				{% assign moreinfo = opportunity | Attribute:'MoreInfolink' %}
-		{% if moreinfo == '' %}
-		{% if DetailPage contains "?" %}
-			<a class="btn btn-fg-open" href="{{ DetailPage }}&OpportunityId={{ opportunity.Id }}" role="button">Contact</a>
+        <div class="care-summary"><center>{{opportunity.Summary}}</center>
+        {% assign moreinfo = opportunity | Attribute:'MoreInfolink' %}
+		{% if moreinfo contains "?" %}
+			<a class="btn btn-fg-open" href="{{ GlobalAtribute | PublicApplicationRoot }}{{ opportunity | Attribute:'MoreInfolink' }}" role="button">Get Connected</a>
 		{% else %}
-			<a class="btn btn-fg-open" href="{{ DetailPage }}?OpportunityId={{ opportunity.Id }}" role="button">Contact</a>
+			<a class="btn btn-fg-open" href="{{ GlobalAtribute | PublicApplicationRoot }}{{ opportunity | Attribute:'MoreInfolink' }}" role="button">More Info</a>
 		{% endif %}
-		{% endif %}
-		{% if moreinfo != '' %}
-		<a class="btn btn-fg-open" <a href="{{ GlobalAtribute | PublicApplicationRoot }}{{ opportunity | Attribute:'MoreInfolink' }}" role="button">More Info</a>
-		{% endif %}
-		</div>
+		
+		
+		
+        </div>
+
+	
+
+		</p>
+	
     </div>
 	</div>
+	{% endif %}
+
 {% endfor %}
 
   </div>
