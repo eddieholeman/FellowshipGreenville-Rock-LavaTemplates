@@ -1,11 +1,11 @@
-<h4 style="text-align:center;">Upcoming Studies</h4>
+{% comment %}<h4 style="text-align:center;">Available Studies</h4>{% endcomment %}
 <div class="row announcement-list">
     {% for item in Items %}
         <div class="col-md-2 col-sm-6">
           
-			{% assign redirectURL = item | Attribute:'ExternalLink','RawValue' %}
+			{% assign redirectURL = item | Attribute:'ButtonLink','RawValue' %}
 			{% assign detailURL = '' %}
-			{% if redirectURL and redirectURL != empty %}{% assign detailURL = redirectURL %}{{}}{% else %}{% capture detailURL %}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{% endcapture %}{% endif %}
+			{% if redirectURL and redirectURL != empty %}{% assign detailURL = redirectURL %}{% else %}{% capture detailURL %}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{% endcapture %}{% endif %}
 
             <p><a href="{{ detailURL }}">{{ item | Attribute:'Image' }}</a></p>
 
@@ -23,3 +23,4 @@
         {% endif -%}
     {% endfor -%}
 </div>
+
