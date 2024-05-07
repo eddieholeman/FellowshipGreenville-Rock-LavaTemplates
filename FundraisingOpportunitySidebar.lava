@@ -1,4 +1,4 @@
-﻿{% if RegistrationInstance %}
+{% if RegistrationInstance %}
 <div class='well margin-t-md'>
     {% assign daysTillStartDate = 'Now' | DateDiff:RegistrationInstance.StartDateTime,'m' %}
     {% assign daysTillEndDate = 'Now' | DateDiff:RegistrationInstance.EndDateTime,'m' %}
@@ -41,10 +41,10 @@
       <div class='label label-default text-center' style='display: block; padding: 8px; margin-bottom: 12px;'>Registration Closed</div>
     {% endif %}
 
-    {% if (RegistrationInstance.ContactPersonAlias.Person.Fullname | Trim != '') or RegistrationInstance.ContactEmail != '' or RegistrationInstance.ContactPhone != '' %}
+    {% if RegistrationInstance.ContactPersonAlias.Person.Fullname != '' or RegistrationInstance.ContactEmail != '' or RegistrationInstance.ContactPhone != '' %}
     <p>
         <strong>Contact</strong><br />
-        {% if RegistrationInstance.ContactPersonAlias.Person.FullName | Trim != '' %}
+        {% if RegistrationInstance.ContactPersonAlias.Person.FullName != '' %}
         {{ RegistrationInstance.ContactPersonAlias.Person.FullName }} <br />
         {% endif %}
 
