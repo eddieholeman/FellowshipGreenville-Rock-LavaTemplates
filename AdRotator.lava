@@ -1,4 +1,4 @@
-﻿<div id="announcement-rotator" class="carousel slide" data-ride="carousel">
+<div id="announcement-rotator" class="carousel slide" data-ride="carousel">
 
 {% comment %}
   <!-- Wrapper for slides -->
@@ -37,15 +37,15 @@
         <div class="item">
       {% endif %}
       
-          {% assign link = item | Attribute:'ExternalLink' %}
+          {% assign link = item | Attribute:'ButtonLink' %}
           {% if link == '' %}
               {% capture link %}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{% endcapture %}
           {% endif %}
           {% assign video = item | Attribute:'Video' %}		  
 		  {% if video == ''%}
-			<a href="{{ link }}">{{ item.DetailImage }}</a>
+			<a href="{{ link }}">{{ item | Attribute:'DetailImage' }}</a>
 		  {% else %}
-			<a href="{{ link }}">{{ item.Video }}</a>
+			<a href="{{ link }}">{{ item | Attribute:'Video' }}</a>
 		  {% endif %}
 		  
         </div>
