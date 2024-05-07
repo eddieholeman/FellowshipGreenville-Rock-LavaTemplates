@@ -1,0 +1,68 @@
+<style>
+	/*.series-banner {
+		height: 220px;
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+	}
+
+	@media (min-width: 992px) {
+		.series-banner {
+			height: 420px;
+		}*/
+	}
+
+	.series-title{
+		margin-bottom: 4px;
+	}
+
+	.series-dates {
+		opacity: .6;
+	}
+
+	.messages-title {
+		font-size: 24px;
+	}
+
+	.messages {
+		font-size: 18px;
+	}
+</style>
+
+{% if Item  %}
+
+	<article class="series-detail">
+		{% assign seriesImageGuid = Item | Attribute:'SeriesImage','RawValue' %}
+		<div class="series-banner" style='background-image: url("/GetImage.ashx?Guid={{ seriesImageGuid }}");' ></div>
+
+
+		<div class="margin-t-lg">
+			{{ Item.Content }}
+		</div>
+		
+
+
+		<h4 class="messages-title margin-t-lg"></h4>
+		<ul class="messages">
+		    {% assign itemlist = Item.ChildItems %}
+		    {% assign today = 'Now' | Date:'M/d/yyyy' | AsDateTime %}
+		    {% assign nextweek = 'Now' | DateAdd:6,'d' | Date:'M/d/yyyy' | AsDateTime %}
+		    
+		    <h4>CBR SCHEDULE</h4>
+		    {% for message in itemlist %}
+		       {% if message.ChildContentChannelItem.StartDateTime < today %}{% continue %}{% elseif message.ChildContentChannelItem.StartDateTime > nextweek %}{% continue %}{% endif %}
+				<li>
+					<a href="/page/2193?Item={{ message.ChildContentChannelItem.Id }}">
+					{{ message.ChildContentChannelItem.StartDateTime | Date:'MMMM d' }} | {{ message.ChildContentChannelItem.Title }} 
+					</a>
+                </li>
+             
+            {% endfor %}
+			
+		</ul>
+
+	</article>
+
+{% else %}
+	<h1>Could not find series.</h1>
+{% endif %}
