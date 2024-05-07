@@ -1,4 +1,4 @@
-﻿{% assign thirdpartylink = Group | Attribute:'ThirdPartyWebsiteLink' %}
+{% assign thirdpartylink = Group | Attribute:'ThirdPartyWebsiteLink' %}
 {% assign percentWidth = PercentMet %}
 {% if percentWidth > 100 %}
   {% assign percentWidth = 100 %}
