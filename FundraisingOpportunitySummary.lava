@@ -1,4 +1,4 @@
-﻿{{ Group | Attribute:'OpportunityTitle' | AddMetaTagToHead:'property','twitter:title' }}
+{{ Group | Attribute:'OpportunityTitle' | AddMetaTagToHead:'property','twitter:title' }}
 {{ Group | Attribute:'OpportunitySummary' | AddMetaTagToHead:'property','twitter:description' }}
 {{ Group | Attribute:'OpportunityTitle' | AddMetaTagToHead:'property','og:title' }}
 {{ Group | Attribute:'OpportunitySummary' | AddMetaTagToHead:'property','og:description' }}
@@ -45,8 +45,8 @@
 	{% assign daysTillAppStartDate = 'Now' | DateDiff:appdateRangeParts[0],'d' %}
     {% assign daysTillAppEndDate = 'Now' | DateDiff:appdateRangeParts[1],'d' %}
 	{% if daysTillAppStartDate <= 0 and daysTillAppEndDate >= 0 %}
-	<a href="/application/missiontrip/1?GroupId={{ PageParameter:'GroupId'}}" target="_blank"><span class="btn btn-default">Apply for Trip</span></a><br />
-	<p>If you are applying for your child who is under the age of 13, please <a href="/staff/contact/14859?Inquiry=Please%20provide%20login%20for%20my%20child%20in%20order%20to%20apply%20for%20a%20mission%20trip." target="_blank"><span class="btn btn-default">contact us</a></p>
+	<a href="/application/missiontrip/1?GroupId={{ PageParameter.GroupId }}" target="_blank"><span class="btn btn-default">Apply for Trip</span></a><br />
+	<p>If you are applying for your child who is under the age of 13, please <a href="/staff/contact/14859?Opportunity=E1C9AD2F-7E54-4312-9C19-09EA1E7EB7F2" target="_blank"><span class="btn btn-default">contact us</a></p>
 	{% endif %}
 	{% endif %}
 	
