@@ -1,0 +1,89 @@
+<style>
+	.series {
+		position: relative;
+		height: 450px;
+	}
+		
+	.series h1 {
+		font-size: 12px;
+		font-weight: 600;
+	}
+	
+	.series-dates {
+		opacity: .6;
+	}
+	
+	.series-link:hover {
+		text-decoration: none;
+	}
+	
+	.series-image {
+		height: 275px;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+/*	
+	.series-image:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		transition: all .1s ease-in-out;
+	}
+	
+	.series-image:hover:after {
+		background: rgba(0,0,0,.2);
+	}
+</style>
+
+<div class="row margin-t-lg">
+	{% for item in Items %}
+	{% assign seriesImageGuid = item | Attribute:'SeriesImage','RawValue' %}
+	
+	<div class="col-md-6 margin-b-md">
+		
+		<article class="series">
+			{% if detailImageGuid != '' %}
+				<div class="series-image" style="background-image: url('/GetImage.ashx?Guid={{ seriesImageGuid }}');" ></div>
+			{% endif %}<br>
+			<p><i>{{ item | Attribute:'Summary'}}</i></p>
+			
+		<p><center><a class="btn btn-default" href="{{ LinkedPages.DetailPage }}?Item={{ item.Id }}" role="button">Learn More</a></center></p>
+		</article>
+		
+		
+	</div>
+	
+{% endfor -%}
+</div>
+
+
+{% if Pagination.TotalPages > 1 %}
+<div class="margin-t-lg">
+  {% assign nextPageString = Pagination.NextPage | ToString %}
+  {% assign prevPageString = Pagination.PreviousPage | ToString %}
+
+  {% if Pagination.PreviousPage == -1 %}
+  <div class="btn btn-default pull-left">
+    <i class="fa fa-chevron-left"></i> Prev
+  </div>
+  {% else %}
+  <a class="btn btn-primary pull-left" href="{{Pagination.UrlTemplate | Replace:'PageNum', prevPageString}}">
+    <i class="fa fa-chevron-left"></i> Prev
+  </a>
+  {% endif %}
+
+  {% if Pagination.NextPage == -1 %}
+  <div class="btn btn-default pull-right">
+    Next <i class="fa fa-chevron-right"></i>
+  </div>
+  {% else %}
+  <a class="btn btn-primary pull-right" href="{{Pagination.UrlTemplate | Replace:'PageNum', nextPageString}}">
+    Next <i class="fa fa-chevron-right"></i>
+  </a>
+  {% endif %}
+</div>
+{% endif %}
