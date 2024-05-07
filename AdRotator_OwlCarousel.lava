@@ -1,4 +1,4 @@
-﻿<div id="announcement-owl" class="owl-carousel">
+<div id="announcement-owl" class="owl-carousel">
     <!-- Wrapper for slides -->
     {% assign itemsSize = 0 %}
         {% for item in Items %}{% assign Image = item | Attribute:'Image' %}
