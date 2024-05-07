@@ -1,3 +1,7 @@
+<style>
+	
+</style>
+
 {% assign item = Item %}
 {% if item  %}
 	
@@ -23,7 +27,8 @@
 			<p>
 			<strong> {{ item | Attribute:'Podcast_Author' }} - {{ item.StartDateTime | Date:'M/d/yyyy' }}</strong>
 		</p>
-    	<div class="row">
+	
+		<div class="row">
 		    <div class="col-md-4">
 				{% if videoLink != '' or audioupload != '' or sermonnotesupload != '' or onscreennotesupload != '' %}
 					<div class="panel panel-default">
@@ -46,7 +51,8 @@
 					</div>
 				{% endif %}
 			</div>
-      	<div class="col-md-8">
+		
+			<div class="col-md-8">
 				{{  item | Attribute:'Podcast_SermonNoteshtml' }}
 			</div>
 		</div>	
