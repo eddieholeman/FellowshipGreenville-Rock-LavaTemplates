@@ -1,32 +1,24 @@
 <article class="margin-b-lg">
 
-    {% assign video = Item | Attribute:'Podcast_VideoID' %}
-  {% assign image = Item | Attribute:'Image' %}
-  {% assign name = Item | Attribute:'Title' %}
-
-  {% if video != '' %}
+  {% if Item.Podcast_VideoID != '' %}
 			<div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/{{ videoid }}" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 			{% else -%}
 			 <div class="story-img">        
-			 {{ image }}
+			 {{ Item.Image }}
 			</div>
 		{% endif %}
-		
- <h4>{{ name }}</h4>	
+ <h4>{{ Item.Title }}</h4>	
 
     <div class="story-text">
     {{ Item.Content }}
-    <p><span class="btn btn-default" style="float: right; padding: 4px 8px; font-size: 16px;"><a href="https://www.fellowshipgreenville.org/page/1812?Name={{ Item.Title }}&ContentChannelId=75">Ask a Question</span></a></p><br>
     <hr style = "width: 100%;">
-    {% assign image1 = Item | Attribute:'AuthorImage' %}
-   <div class="story-img">{{ image1 }}</div>
+    <div class="story-img">{{ Item.AuthorImage }}</div>
     {% assign who = Item | Attribute:'Author' %}
-    {% assign bio = Item | Attribute:'AuthorBio' %}
     {% if who == 'Anonymous Anonymous' %}
     {% else %}
-    <h5>Written by {{ who }}</h5>
+    <h5>Written by {{ Item.Author }}</h5>
     {% endif %}
-    {{ bio }}
+    {{ Item.AuthorBio }}
 	</div>
 
 <ul class="socialsharing">
@@ -41,4 +33,3 @@
 				</a>
 			</li>
 		</ul>
-
