@@ -1,0 +1,97 @@
+﻿<style>
+	.series {
+		position: relative;
+	}
+		
+	.series h1 {
+		font-size: 14px;
+		font-weight: 600;
+		
+	}
+	
+	.series-link:hover {
+		text-decoration: none;
+	}
+	
+	.series-image {
+	    height: 300px;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+		/*
+	.series-image:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		transition: all .1s ease-in-out;
+	}
+	*/
+	.page-numbering {
+	    text-align: center;
+	    display: inline;
+	}
+	
+</style>
+ 
+<div class="row lifephase-row">
+{% for item in Items %}
+{% assign seriesImageGuid = item | Attribute:'MainImage','RawValue' %}
+{% assign priority = item.Priority | AsInteger %}
+{% assign learnmore = item | Attribute:'LearnMoreLink' %}
+		
+{% if priority >= 1 %}
+
+	<div class="col-md-4 col-sm-6">
+		   	   
+	<div class="growth-panel">
+			<div class="lifephase-photo">
+			{% if detailImageGuid != '' %}
+				<a href="{{ learnmore }}"><div class="series-image" style="background-image: url('/GetImage.ashx?Guid={{ seriesImageGuid }}');" ></div></a>
+			{% endif %}
+			
+
+			<div class="growth-summary">
+				<h4>{{ item.Title }}</h4>
+			<p>{{ item.Content }}</p>
+				
+			</div>
+		</div>
+		</div>
+	</div>
+{% endif %}	
+{% endfor %}
+</div>
+
+
+{% assign total = Pagination.TotalPages %}
+{% assign currentPageString = Pagination.CurrentPage | ToString %}
+{% if Pagination.TotalPages > 1 %}
+
+<div class="margin-t-lg">
+  {% assign nextPageString = Pagination.NextPage | ToString %}
+  {% assign prevPageString = Pagination.PreviousPage | ToString %}
+  <div class="page-numbering"><h4>Page {{ currentPageString }} of {{ total }}</h4></div>
+
+  {% if Pagination.PreviousPage == -1 %}
+  
+  
+  {% else %}
+  <a class="btn btn-primary pull-left" href="{{Pagination.UrlTemplate | Replace:'PageNum', prevPageString}}">
+    <i class="fa fa-chevron-left"></i> Prev
+  </a>
+  {% endif %}
+
+  {% if Pagination.NextPage == -1 %}
+ 
+  
+  {% else %}
+  <a class="btn btn-primary pull-right" href="{{Pagination.UrlTemplate | Replace:'PageNum', nextPageString}}">
+    Next <i class="fa fa-chevron-right"></i>
+  </a>
+  {% endif %}
+</div>
+{% endif %}
